@@ -96,7 +96,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: changes
     environment: ${{ needs.changes.outputs.tfvars }}
-    if: needs.changes.outputs.infra == 'true'
+    if: github.event_name != 'pull_request' && needs.changes.outputs.infra == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Generate token from GitHub App
